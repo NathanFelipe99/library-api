@@ -30,6 +30,6 @@ describe("Testing Customer class constructor", () => {
 
         expect(newCustomer.email).toEqual("jane.doe@mail.com");
         expect(newCustomer.isActive).toEqual(false);
-        
+        expect(newCustomer.updatedAt).toBeDefined();
     });
 });

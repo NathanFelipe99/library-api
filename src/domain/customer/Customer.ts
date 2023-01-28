@@ -1,4 +1,4 @@
-import { CustomerProps } from "./types/CustomerTypes";
+import { CustomerProps } from "../../shared/utils/types/customer/customer.types";
 import crypto from "crypto";
 
 class Customer {
@@ -9,7 +9,8 @@ class Customer {
         this.id = id || crypto.randomUUID();
         this.props = {
             ...props,
-            isActive: true
+            isActive: true,
+            createdAt: new Date()
         }
     }
 
@@ -31,6 +32,14 @@ class Customer {
 
     get isActive() {
         return this.props.isActive || false;
+    }
+
+    get createdAt() {
+        return this.props.createdAt;
+    }
+
+    get updatedAt() {
+        return this.props.updatedAt;
     }
 
     private set firstName(firstName: string) {
@@ -55,22 +64,27 @@ class Customer {
 
     updateFirstName(firstName: string) {
         this.firstName = firstName;
+        this.props.updatedAt = new Date();
     }
 
     updateLastName(lastName: string) {
         this.lastName = lastName;
+        this.props.updatedAt = new Date();
     }
 
     updateEmail(email: string) {
         this.email = email;
+        this.props.updatedAt = new Date();
     }
 
     updatePassword(password: string) {
         this.password = password;
+        this.props.updatedAt = new Date();
     }
 
     inactivateCustomer(isActive: boolean) {
         this.isActive = isActive;
+        this.props.updatedAt = new Date();
     }
 
     toJSON() {
