@@ -1,4 +1,5 @@
 import { CustomerProps } from "./types/CustomerTypes";
+import crypto from "crypto";
 
 class Customer {
     public readonly id: string;
@@ -52,17 +53,29 @@ class Customer {
         this.props.isActive = value;
     }
 
-    updateData(data: CustomerProps) {
-        this.firstName = data.firstName;
-        this.lastName = data.lastName;
-        this.email = data.email;
-        this.password = data.password;
-        this.isActive = data.isActive || false;
+    updateFirstName(firstName: string) {
+        this.firstName = firstName;
+    }
+
+    updateLastName(lastName: string) {
+        this.lastName = lastName;
+    }
+
+    updateEmail(email: string) {
+        this.email = email;
+    }
+
+    updatePassword(password: string) {
+        this.password = password;
+    }
+
+    inactivateCustomer(isActive: boolean) {
+        this.isActive = isActive;
     }
 
     toJSON() {
         return { id: this.id, ...this.props };
     }
 }
-
-export { Customer };
+ 
+export default Customer;
