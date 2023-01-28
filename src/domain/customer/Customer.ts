@@ -88,7 +88,16 @@ class Customer {
     }
 
     toJSON() {
-        return { id: this.id, ...this.props };
+        const { firstName, lastName, email, isActive, createdAt, updatedAt } = this.props;
+        return {
+            id: this.id,
+            firstName,
+            lastName,
+            email,
+            isActive,
+            createdAt,
+            updatedAt
+        };
     }
 }
  

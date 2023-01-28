@@ -19,7 +19,9 @@ describe("Create customer use case test", () => {
             firstName: "John",
             lastName: "Doe",
             email: "john@doe.com",
-            isActive: true
+            isActive: true,
+            createdAt: customerRepository.customers.at(-1)?.createdAt,
+            updatedAt: undefined
         });
     });
 });

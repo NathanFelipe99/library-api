@@ -8,7 +8,7 @@ export type CustomerProps = {
     updatedAt?: Date;
 }
 
-export type CreateCustomerOutput = {
+export type CustomerOutput = {
     id: string;
     firstName: string;
     lastName: string;
