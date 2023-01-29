@@ -21,12 +21,12 @@ export class CustomerRepositoryInMemory implements ICustomerRepository {
         return this.customers;
     }
 
-    async findByID(id: string): Promise<Customer | undefined> {
-        return this.customers.find(customer => customer.id === id);
+    async findByID(id: string): Promise<Customer> {
+        return this.customers.find(customer => customer.id === id) as Customer;
     }
 
-    async findByEmail(email: string): Promise<Customer | undefined> {
-        return this.customers.find(customer => customer.email === email);
+    async findByEmail(email: string): Promise<Customer> {
+        return this.customers.find(customer => customer.email === email) as Customer;
     }
     
     async inactivate(id: string): Promise<void> {
