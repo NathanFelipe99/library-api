@@ -1,5 +1,7 @@
 import Customer from "../../../../domain/customer/Customer";
 import { ICustomerRepository } from "../../../../domain/customer/interfaces/ICustomerRepository";
+import { CustomerOutput } from "../../../../shared/utils/types/customer/customer.types";
+import { IUpdateCustomerDTO } from "./dtos/IUpdateCustomerDTO";
 
 export class CustomerRepositoryInMemory implements ICustomerRepository {
     customers: Customer[] = [];
@@ -8,14 +10,14 @@ export class CustomerRepositoryInMemory implements ICustomerRepository {
         this.customers.push(data);
     }
 
-    async update(data: Customer): Promise<Customer> {
-        const { id, firstName, lastName, email } = data;
+    async update(id: string, data: IUpdateCustomerDTO): Promise<CustomerOutput> {
+        const { firstName, lastName, email } = data;
         const customerIndex = this.customers.findIndex(customer => customer.id === id);
-        this.customers[customerIndex].updateFirstName(firstName);
-        this.customers[customerIndex].updateLastName(lastName);
+        firstName && this.customers[customerIndex].updateFirstName(firstName);
+        lastName && this.customers[customerIndex].updateLastName(lastName);
         this.customers[customerIndex].updateEmail(email);
 
-        return this.customers[customerIndex];
+        return this.customers[customerIndex].toJSON();
     }
     async findAll(): Promise<Customer[]> {
         return this.customers;
