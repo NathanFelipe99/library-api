@@ -13,7 +13,7 @@ export class UpdateCustomerUseCase {
         if (!customerExists) throw new Error("Customer not exists");
 
         const customerEmailExists = await this._customerRepository.findByEmail(data.email);
-        if (customerEmailExists && (data.email !== customerExists.email)) throw new Error("Customer email already exists");
+        if (customerEmailExists && (customerEmailExists.id !== customerExists.id)) throw new Error("Customer email already exists");
 
         const customer = await this._customerRepository.update(id, data);
         return customer;
