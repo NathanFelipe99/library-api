@@ -1,4 +1,3 @@
-import Customer from "../../../domain/customer/Customer";
 import { ICustomerRepository } from "../../../domain/customer/interfaces/ICustomerRepository";
 import { IUpdateCustomerDTO } from "../../../infra/database/repositories/customer/dtos/IUpdateCustomerDTO";
 import { CustomerOutput } from "../../../shared/utils/types/customer/customer.types";

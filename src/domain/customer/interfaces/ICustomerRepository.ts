@@ -7,6 +7,6 @@ export interface ICustomerRepository {
     findAll(): Promise<Customer[]>;
     findByID(id: string): Promise<Customer>;
     findByEmail(email: string): Promise<Customer>;
-    inactivate(id: string): Promise<void>;
+    setStatus(id: string, isActive: boolean): Promise<void>;
     delete(id: string): Promise<void>;
 }

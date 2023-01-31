@@ -1,5 +1,5 @@
 import Customer from "./Customer";
-import { CustomerProps } from "./types/CustomerTypes";
+import { CustomerProps } from "./../../shared/utils/types/customer/customer.types";
 
 describe("Testing Customer class constructor", () => {
     test("customer must have id & isActive property", () => {
@@ -26,7 +26,7 @@ describe("Testing Customer class constructor", () => {
 
         const newCustomer = new Customer(customerProps);
         newCustomer.updateEmail("jane.doe@mail.com");
-        newCustomer.inactivateCustomer(false);
+        newCustomer.setCustomerStatus(false);
 
         expect(newCustomer.email).toEqual("jane.doe@mail.com");
         expect(newCustomer.isActive).toEqual(false);

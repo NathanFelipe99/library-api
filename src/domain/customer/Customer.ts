@@ -82,7 +82,7 @@ class Customer {
         this.props.updatedAt = new Date();
     }
 
-    inactivateCustomer(isActive: boolean) {
+    setCustomerStatus(isActive: boolean) {
         this.isActive = isActive;
         this.props.updatedAt = new Date();
     }

@@ -31,9 +31,9 @@ export class CustomerRepositoryInMemory implements ICustomerRepository {
         return this.customers.find(customer => customer.email === email) as Customer;
     }
     
-    async inactivate(id: string): Promise<void> {
+    async setStatus(id: string, isActive: boolean): Promise<void> {
         const customerIndex = this.customers.findIndex(customer => customer.id === id);
-        this.customers[customerIndex].inactivateCustomer(false);
+        this.customers[customerIndex].setCustomerStatus(isActive);
     }
 
     async delete(id: string): Promise<void> {
