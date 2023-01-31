@@ -1,10 +1,10 @@
 import { CustomerRepositoryInMemory } from "../../../infra/database/repositories/customer/CustomerRepositoryInMemory";
 import { CreateCustomerUseCase } from "./CreateCustomerUseCase";
 
+const customerRepository = new CustomerRepositoryInMemory();
+const createCustomerUseCase = new CreateCustomerUseCase(customerRepository);
 describe("Create customer use case test", () => {
     it("should be able to construct and insert a new customer using the useCase", async () => {
-        const customerRepository = new CustomerRepositoryInMemory();
-        const createCustomerUseCase = new CreateCustomerUseCase(customerRepository);
 
         const newCustomer = await createCustomerUseCase.execute({
             firstName: "John",
