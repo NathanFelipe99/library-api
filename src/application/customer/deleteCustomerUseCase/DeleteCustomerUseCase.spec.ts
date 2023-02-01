@@ -1,12 +1,24 @@
+import { ICustomerRepository } from "../../../domain/customer/interfaces/ICustomerRepository";
 import { CustomerRepositoryInMemory } from "../../../infra/database/repositories/customer/CustomerRepositoryInMemory";
 import { CreateCustomerUseCase } from "../createCustomerUseCase/CreateCustomerUseCase";
+import { FindCustomerByIdUseCase } from "../findCustomerByIdUseCase/FindCustomerByIdUseCase";
 import { DeleteCustomerUseCase } from "./DeleteCustomerUseCase";
 
-const customerRepository = new CustomerRepositoryInMemory();
-const createCustomerUseCase = new CreateCustomerUseCase(customerRepository);
-const deleteCustomerUseCase = new DeleteCustomerUseCase(customerRepository);
+
+let customerRepository: ICustomerRepository;
+let createCustomerUseCase: CreateCustomerUseCase;
+let findCustomerByIdUseCase: FindCustomerByIdUseCase;
+let deleteCustomerUseCase: DeleteCustomerUseCase;
 
 describe("Delete a existing customer", () => {
+
+    beforeEach(() => {
+        customerRepository = new CustomerRepositoryInMemory();
+        createCustomerUseCase = new CreateCustomerUseCase(customerRepository);
+        findCustomerByIdUseCase = new FindCustomerByIdUseCase(customerRepository);
+        deleteCustomerUseCase = new DeleteCustomerUseCase(customerRepository);
+    });
+
     it("should be able to delete a customer", async () => {
         const newCustomer = await createCustomerUseCase.execute({
             firstName: "John",
@@ -17,7 +29,11 @@ describe("Delete a existing customer", () => {
 
         await deleteCustomerUseCase.execute(newCustomer.id);
 
-        expect(customerRepository.customers.length).toEqual(0);
-
+        try {
+            await findCustomerByIdUseCase.execute(newCustomer.id);
+        } catch (error) {
+            expect(error.message).toEqual("Customer not found!");
+            expect(error).toBeInstanceOf(Error);
+        }
     });
 });

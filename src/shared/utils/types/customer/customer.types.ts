@@ -5,7 +5,7 @@ export type CustomerProps = {
     password: string;
     isActive?: boolean;
     createdAt?: Date;
-    updatedAt?: Date;
+    updatedAt?: Date | null;
 }
 
 export type CustomerOutput = {

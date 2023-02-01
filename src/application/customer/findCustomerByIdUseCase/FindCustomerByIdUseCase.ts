@@ -8,6 +8,7 @@ export class FindCustomerByIdUseCase {
     
     async execute(id: string): Promise<CustomerOutput> {
         const customer = await this._customerRepository.findByID(id);
+        if (!customer) throw new Error("Customer not found!");
         return customer.toJSON();
     }
 }

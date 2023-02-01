@@ -10,7 +10,8 @@ class Customer {
         this.props = {
             ...props,
             isActive: true,
-            createdAt: new Date()
+            createdAt: new Date(),
+            updatedAt: null
         }
     }
 
