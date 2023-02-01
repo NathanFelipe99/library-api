@@ -1,13 +1,19 @@
+import { ICustomerRepository } from "../../../domain/customer/interfaces/ICustomerRepository";
 import { CustomerRepositoryInMemory } from "../../../infra/database/repositories/customer/CustomerRepositoryInMemory";
 import { CreateCustomerUseCase } from "../createCustomerUseCase/CreateCustomerUseCase";
 import { FindCustomerByIdUseCase } from "./FindCustomerByIdUseCase";
 
-const customerRepository = new CustomerRepositoryInMemory();
-const findCustomerByIdUseCase = new FindCustomerByIdUseCase(customerRepository);
+let customerRepository: ICustomerRepository;
+let createCustomerUseCase: CreateCustomerUseCase;
+let findCustomerByIdUseCase: FindCustomerByIdUseCase;
+
 describe("Find a customer by ID use case test", () => {
-    test("should be able to find a customer", async () => {
-        
-        const createCustomerUseCase = new CreateCustomerUseCase(customerRepository);
+    beforeEach(() => {
+        customerRepository = new CustomerRepositoryInMemory();
+        createCustomerUseCase = new CreateCustomerUseCase(customerRepository);
+        findCustomerByIdUseCase = new FindCustomerByIdUseCase(customerRepository);
+    });
+    it("should be able to find a customer", async () => {   
         const newCustomer = await createCustomerUseCase.execute({
             firstName: "John",
             lastName: "Doe",

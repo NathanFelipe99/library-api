@@ -11,6 +11,7 @@ describe("Create customer use case test", () => {
         customerRepository = new CustomerRepositoryInMemory();
         createCustomerUseCase = new CreateCustomerUseCase(customerRepository);
     });
+    
     it("should be able to construct and insert a new customer using the useCase", async () => {
         const obj: CustomerProps = {
             firstName: "John",
