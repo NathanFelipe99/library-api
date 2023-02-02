@@ -6,5 +6,7 @@ export type BookCategoryProps = {
 }
 
 export type BookCategoryOutput = {
-    
+    id: string;
+    name: string;
+    isActive?: boolean;
 }

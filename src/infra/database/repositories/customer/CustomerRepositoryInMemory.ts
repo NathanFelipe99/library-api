@@ -31,12 +31,12 @@ export class CustomerRepositoryInMemory implements ICustomerRepository {
         return this.customers.find(customer => customer.email === email) as Customer;
     }
     
-    async setStatus(id: string, isActive: boolean): Promise<void> {
+    setStatus(id: string, isActive: boolean): void {
         const customerIndex = this.customers.findIndex(customer => customer.id === id);
         this.customers[customerIndex].setCustomerStatus(isActive);
     }
 
-    async delete(id: string): Promise<void> {
+    delete(id: string): void {
         const customerIndex = this.customers.findIndex(customer => customer.id === id);
         this.customers.splice(customerIndex, 1);
     }
