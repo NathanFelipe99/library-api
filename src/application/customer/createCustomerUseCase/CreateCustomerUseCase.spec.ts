@@ -28,4 +28,25 @@ describe("Create customer use case test", () => {
         expect(newCustomer.email).toStrictEqual(obj.email);
         expect(newCustomer.isActive).toEqual(true);
     });
+
+    it("shouldn't be able to create a customer", async () => {
+        const firstCustomerObj: CustomerProps = {
+            firstName: "John",
+            lastName: "Doe",
+            email: "john@doe.com",
+            password: "123"
+        };
+
+        await createCustomerUseCase.execute(firstCustomerObj);
+
+        const secondCustomerObj: CustomerProps = {
+            firstName: "Jane",
+            lastName: "Doe",
+            email: "john@doe.com",
+            password: "12345"
+        };
+
+        expect(createCustomerUseCase.execute(secondCustomerObj)).rejects.toBeInstanceOf(Error);
+        expect(createCustomerUseCase.execute(secondCustomerObj)).rejects.toThrowError("This email has already been registered! Try another one.");
+    });
 });
