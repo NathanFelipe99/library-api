@@ -8,6 +8,10 @@ export class CreateBookCategoryUseCase {
     ) { }
     
     async execute(data: BookCategoryProps): Promise<BookCategoryOutput> {
+        const { name } = data;
+        const bookCategoryExists = await this._bookCategoryRepository.findByName(name);
+        if (bookCategoryExists) throw new Error("This category already exists!");
+
         const bookCategory = new BookCategory(data);
         await this._bookCategoryRepository.create(bookCategory);
         return bookCategory.toJSON();
