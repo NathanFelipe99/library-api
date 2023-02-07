@@ -1,6 +1,6 @@
 import { IBookCategoryRepository } from "../../../domain/bookCategory/interfaces/IBookCategoryRepository";
 import { BookCategoryRepositoryInMemory } from "../../../infra/database/repositories/bookCategory/BookCategoryRepositoryInMemory";
-import { BookCategoryProps } from "../../../shared/utils/types/bookCategory/bookCategory.types";
+import { BookCategoryInput } from "../../../shared/utils/types/bookCategory/bookCategory.types";
 import { CreateBookCategoryUseCase } from "./CreateBookCategoryUseCase";
 
 let bookCategoryRepository: IBookCategoryRepository;
@@ -12,7 +12,7 @@ describe("Create book category use case test", () => {
         createBookCategoryUseCase = new CreateBookCategoryUseCase(bookCategoryRepository);
     });
     it("should be able to create a new book category", async () => {
-        const newBookCategoryObj: BookCategoryProps = {
+        const newBookCategoryObj: BookCategoryInput = {
             name: "Crime"
         };
 
@@ -24,13 +24,13 @@ describe("Create book category use case test", () => {
     });
 
     it("shouldn't be able to create a new book category", async () => {
-        const firstBookCategoryObj: BookCategoryProps = {
+        const firstBookCategoryObj: BookCategoryInput = {
             name: "Crime"
         };
 
         await createBookCategoryUseCase.execute(firstBookCategoryObj);
 
-        const secondBookCategory: BookCategoryProps = {
+        const secondBookCategory: BookCategoryInput = {
             name: "Crime"
         };
 

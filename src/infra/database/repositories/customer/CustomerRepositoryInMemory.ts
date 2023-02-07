@@ -28,7 +28,7 @@ export class CustomerRepositoryInMemory implements ICustomerRepository {
     }
 
     async findByEmail(email: string): Promise<Customer> {
-        return this.customers.find(customer => customer.email === email) as Customer;
+        return this.customers.find(customer => customer.email.toLowerCase() === email.toLowerCase()) as Customer;
     }
     
     setStatus(id: string, isActive: boolean): void {

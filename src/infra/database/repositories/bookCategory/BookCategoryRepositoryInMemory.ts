@@ -27,7 +27,7 @@ export class BookCategoryRepositoryInMemory implements IBookCategoryRepository{
     }
 
     async findByName(name: string): Promise<BookCategory> {
-        return this.categories.find(category => category.name === name) as BookCategory;
+        return this.categories.find(category => category.name.toLowerCase() === name.toLowerCase()) as BookCategory;
     }
 
     setStatus(id: string, isActive: boolean): void {
